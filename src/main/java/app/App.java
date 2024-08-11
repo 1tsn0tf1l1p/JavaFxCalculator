@@ -1,5 +1,6 @@
 package app;
 
+import app.model.Database;
 import app.view.MainView;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -12,8 +13,9 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+        Database.getInstance();
         MainView root = new MainView();
-        Scene mainScene = new Scene(root);
+        Scene mainScene = new Scene(root, 400, 480);
         stage.setScene(mainScene);
         stage.setTitle("Calculator");
         stage.show();
