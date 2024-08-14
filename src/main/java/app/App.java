@@ -15,7 +15,10 @@ public class App extends Application {
     public void start(Stage stage) throws Exception {
         Database.getInstance();
         MainView root = new MainView();
-        Scene mainScene = new Scene(root, 400, 480);
+        root.setId("mainVBox");
+        String css = this.getClass().getResource("/mainstyle.css").toExternalForm();
+        root.getStylesheets().add(css);
+        Scene mainScene = new Scene(root, 450, 500);
         stage.setScene(mainScene);
         stage.setTitle("Calculator");
         stage.show();

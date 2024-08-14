@@ -1,0 +1,81 @@
+.vbox {
+    -fx-background-color: black;
+}
+
+.list-view {
+    -fx-background-color: black;
+    -fx-padding: 5px;
+    -fx-border-color: black;
+}
+
+.list-cell {
+    -fx-background-color: black;
+    -fx-text-fill: white;
+    -fx-font-size: 15px;
+}
+
+.list-cell:hover {
+    -fx-background-color: #a5a5a5;
+    -fx-text-fill: black;
+}
+
+.list-cell:focused, .list-cell:selected {
+    -fx-background-color: #ff9f0a;
+    -fx-font-weight: bold;
+}
+
+.scroll-bar:vertical, .scroll-bar:horizontal {
+    -fx-background-color: black;
+    -fx-padding: 3px;
+}
+
+.scroll-bar:vertical .thumb, .scroll-bar:horizontal .thumb {
+    -fx-background-color: #ff9f0a;
+    -fx-background-radius: 4px;
+}
+
+.scroll-bar:vertical .increment-button,
+.scroll-bar:vertical .decrement-button,
+.scroll-bar:horizontal .increment-button,
+.scroll-bar:horizontal .decrement-button {
+    -fx-background-color: black;
+    -fx-background-radius: 50%;
+    -fx-fill: #ff9f0a;
+}
+
+.scroll-bar:vertical .increment-button .arrow,
+.scroll-bar:vertical .decrement-button .arrow,
+.scroll-bar:horizontal .increment-button .arrow,
+.scroll-bar:horizontal .decrement-button .arrow {
+    -fx-background-color: white; /* Color of the arrow icons */
+}
+
+.scroll-bar:vertical .increment-button .content,
+.scroll-bar:vertical .decrement-button .content,
+.scroll-bar:horizontal .increment-button .content,
+.scroll-bar:horizontal .decrement-button .content {
+    -fx-background-color: transparent;
+    -fx-background-radius: 50%;
+}
+
+.scroll-bar .corner {
+    -fx-background-color: black;
+}
+
+.list-view .corner {
+    -fx-background-color: black;
+}
+
+.list-view .scroll-bar:vertical,
+.list-view .scroll-bar:horizontal {
+    -fx-background-color: black;
+    -fx-padding: 3px;
+}
+
+.button {
+    -fx-background-color: #a5a5a5;
+    -fx-text-fill: black;
+    -fx-font-size: 20px;
+    -fx-border-radius: 40;
+    -fx-background-radius: 40;
+}

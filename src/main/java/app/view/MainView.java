@@ -8,9 +8,14 @@
     import javafx.scene.control.Button;
     import javafx.scene.control.ButtonBar;
     import javafx.scene.control.TextField;
+    import javafx.scene.image.Image;
+    import javafx.scene.image.ImageView;
     import javafx.scene.layout.*;
     import javafx.stage.Stage;
 
+    import java.io.File;
+    import java.net.MalformedURLException;
+    import java.net.URL;
     import java.util.Arrays;
 
     public class MainView extends VBox {
@@ -44,6 +49,8 @@
         private ButtonBar buttonBar;
         private HBox hBoxHistory;
         private Button btnHistory;
+        private Image icon;
+        private ImageView imageView;
 
         public MainView() {
             initElements();
@@ -62,8 +69,11 @@
             Arrays.stream(buttons).forEach(button -> button.setOnAction(buttonController));
             btnHistory.setOnAction(e -> {
                 Stage stage = new Stage();
-                HistoryView historyView = new HistoryView(this, stage);
-                Scene scene = new Scene(historyView);
+                HistoryView root = new HistoryView(this, stage);
+                root.getStyleClass().add("vbox");
+                String css = this.getClass().getResource("/historystyle.css").toExternalForm();
+                root.getStylesheets().add(css);
+                Scene scene = new Scene(root, 1000, 700);
                 stage.setScene(scene);
                 stage.show();
             });
@@ -77,7 +87,7 @@
 
             gridPaneButtons.setHgap(10);
             gridPaneButtons.setVgap(10);
-            gridPaneButtons.setPadding(new Insets(20));
+            gridPaneButtons.setPadding(new Insets(20, 2, 20, 2));
             gridPaneButtons.setAlignment(Pos.CENTER);
 
             hBoxHistory.setAlignment(Pos.CENTER_RIGHT);
@@ -110,6 +120,20 @@
             gridPaneButtons.add(btnHistory, 3, 5, 2, 1);
 
             this.getChildren().addAll(tfResult, gridPaneButtons, hBoxHistory);
+
+            /*
+
+            URL cssUrl = getClass().getResource("/mainstyle.css");
+            if (cssUrl == null) {
+                System.out.println("CSS file not found!");
+            } else {
+                System.out.println("CSS URL: " + cssUrl.toExternalForm());
+                String css = cssUrl.toExternalForm();
+                this.getStylesheets().add(css);
+            }
+
+             */
+
         }
 
         private void initElements() {
@@ -140,9 +164,26 @@
             btnTan = new Button("tan");
             btnCot = new Button("cot");
 
-            btnHistory = new Button("History");
+            btnHistory = new Button("  History");
 
             btnLog = new Button("log10\u200B(x)");
+
+            Button[] additional = {btnSin, btnCos, btnTan, btnCot};
+
+            Arrays.stream(additional).forEach(btn -> btn.setId("additional"));
+
+            Button[] utils = {btnPercent, btnPlusMinus, btnAc, btnC, btnHistory};
+
+            Arrays.stream(utils).forEach(btn -> btn.setId("util"));
+
+            Button[] digits = {btn0, btn1, btn2, btn3, btn4,
+                    btn5, btn6, btn7, btn8, btn9, btnDot};
+
+            Arrays.stream(digits).forEach(btn -> btn.setId("digit"));
+
+            Button[] operators = {btnDivide, btnMultiply, btnMinus, btnPlus, btnEqual};
+
+            Arrays.stream(operators).forEach(btn -> btn.setId("operator"));
 
             Button[] buttons = {btn0, btn1, btn2, btn3, btn4,
                     btn5, btn6, btn7, btn8, btn9, btnDivide, btnPercent, btnAc, btnEqual,
@@ -155,13 +196,18 @@
             tfResult.setEditable(false);
             tfResult.setText("0");
             tfResult.setAlignment(Pos.CENTER_RIGHT);
-            tfResult.setPadding(new Insets(10));
+            tfResult.setPadding(new Insets(30, 2, 10, 2));
             tfResult.setPrefHeight(50);
-            tfResult.setStyle("-fx-font-size: 18px;");
 
             gridPaneButtons = new GridPane();
             buttonBar = new ButtonBar();
             hBoxHistory = new HBox();
+
+            icon = new Image("/history.png");
+            imageView = new ImageView(icon);
+            imageView.setFitWidth(24);
+            imageView.setFitHeight(24);
+            btnHistory.setGraphic(imageView);
 
         }
 

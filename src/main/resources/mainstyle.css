@@ -1,0 +1,42 @@
+#mainVBox {
+    -fx-background-color: black;
+    -fx-alignment: center;
+}
+
+.text-field {
+    -fx-background-color: black;
+    -fx-text-fill: white;
+    -fx-font-size: 40px;
+}
+
+#digit {
+    -fx-background-color: #333333;
+    -fx-text-fill: white;
+    -fx-font-size: 20px;
+    -fx-border-radius: 40;
+    -fx-background-radius: 40;
+}
+
+#operator {
+    -fx-background-color: #ff9f0a;
+    -fx-text-fill: white;
+    -fx-font-size: 20px;
+    -fx-border-radius: 40;
+    -fx-background-radius: 40;
+}
+
+#util {
+    -fx-background-color: #a5a5a5;
+    -fx-text-fill: black;
+    -fx-font-size: 20px;
+    -fx-border-radius: 40;
+    -fx-background-radius: 40;
+}
+
+#additional {
+    -fx-background-color: #212121;
+    -fx-text-fill: white;
+    -fx-font-size: 20px;
+    -fx-border-radius: 40;
+    -fx-background-radius: 40;
+}

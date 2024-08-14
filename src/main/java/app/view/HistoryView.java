@@ -51,6 +51,7 @@ public class HistoryView extends VBox {
 
     private void initElements() {
         resultListView = new ListView<>();
+        //resultListView.getStyleClass().add("lista");
         btnClose = new Button("Close");
     }
 
