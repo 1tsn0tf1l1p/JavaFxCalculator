@@ -18,7 +18,7 @@ public class App extends Application {
         root.setId("mainVBox");
         String css = this.getClass().getResource("/mainstyle.css").toExternalForm();
         root.getStylesheets().add(css);
-        Scene mainScene = new Scene(root, 450, 500);
+        Scene mainScene = new Scene(root, 640, 500);
         stage.setScene(mainScene);
         stage.setTitle("Calculator");
         stage.show();

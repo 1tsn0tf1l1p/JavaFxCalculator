@@ -11,6 +11,7 @@ import javafx.scene.control.TextField;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.text.BreakIterator;
 import java.time.LocalDateTime;
 import java.util.Stack;
 
@@ -75,13 +76,86 @@ public class ButtonController implements EventHandler<ActionEvent> {
             case "cot":
                 trigonometric(tfResult, "cot");
                 break;
+            case "log\u2081\u2080":
+                logarithm(tfResult);
+                break;
+            case "e\u02E3":
+                eExponent(tfResult);
+                break;
+            case "\u221A\u0078":
+                squareRoot(tfResult);
+                break;
+            case "x\u00B2":
+                secondPwr(tfResult);
+                break;
+            case "\u03C0":
+                pi(tfResult);
+                break;
             default:
                 appendText(tfResult, buttonText);
         }
     }
 
+    private void pi(TextField tfResult) {
+        if(tfResult.getText().matches(".*[0-9]$") && !tfResult.getText().equals("0")) {
+            return;
+        }
+        else {
+            if(tfResult.getText().equals("0")) {
+                tfResult.setText("3.14159265");
+                return;
+            }
+            tfResult.setText(tfResult.getText() + "3.14159265");
+        }
+    }
+
+    private void secondPwr(TextField tfResult) {
+        BigDecimal calculationResult = calc(prefixToPostfix(tfResult.getText()));
+        BigDecimal finalResult = BigDecimal.valueOf(Math.pow(Double.parseDouble(calculationResult.toString()), 2));
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("(").append(tfResult.getText()).append(")^2");
+        Result r = new Result(stringBuilder.toString(), finalResult, LocalDateTime.now());
+        System.out.println(r);
+        Database.getInstance().write(r);
+        tfResult.setText(String.valueOf(finalResult));
+    }
+
+    private void squareRoot(TextField tfResult) {
+        BigDecimal calculationResult = calc(prefixToPostfix(tfResult.getText()));
+        BigDecimal finalResult = BigDecimal.valueOf(Math.sqrt(Double.parseDouble(calculationResult.toString())));
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("sqrt(").append(tfResult.getText()).append(")");
+        Result r = new Result(stringBuilder.toString(), finalResult, LocalDateTime.now());
+        System.out.println(r);
+        Database.getInstance().write(r);
+        tfResult.setText(String.valueOf(finalResult));
+    }
+
+    private void eExponent(TextField tfResult) {
+        BigDecimal calculationResult = calc(prefixToPostfix(tfResult.getText()));
+        BigDecimal finalResult = BigDecimal.valueOf(Math.exp(Double.parseDouble(calculationResult.toString())));
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("e^").append("(").append(tfResult.getText()).append(")");
+        Result r = new Result(stringBuilder.toString(), finalResult, LocalDateTime.now());
+        System.out.println(r);
+        Database.getInstance().write(r);
+        tfResult.setText(String.valueOf(finalResult));
+    }
+
+    private void logarithm(TextField tfResult) {
+        BigDecimal res = calc(prefixToPostfix(tfResult.getText()));
+        BigDecimal result  = BigDecimal.valueOf(Math.log10(Double.parseDouble(String.valueOf(res))));
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("log\u2081\u2080(").append(tfResult.getText()).append(")");
+        Result r = new Result(stringBuilder.toString(), result, LocalDateTime.now());
+        System.out.println(r);
+        Database.getInstance().write(r);
+        tfResult.setText(String.valueOf(result));
+    }
+
     private void trigonometric(TextField tfResult, String function) {
-        double value = Math.toRadians(Double.parseDouble(tfResult.getText()));
+        BigDecimal res = calc(prefixToPostfix(tfResult.getText()));
+        double value = Math.toRadians(Double.parseDouble(String.valueOf(res)));
         double result = 0;
         switch (function) {
             case "sin":

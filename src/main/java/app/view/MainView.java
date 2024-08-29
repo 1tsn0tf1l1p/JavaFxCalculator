@@ -45,6 +45,10 @@
         private Button btnTan;
         private Button btnCot;
         private Button btnLog;
+        private Button btnEx;
+        private Button btnSqrt;
+        private Button btnPwr;
+        private Button btnPi;
         private GridPane gridPaneButtons;
         private ButtonBar buttonBar;
         private HBox hBoxHistory;
@@ -65,7 +69,7 @@
             Button[] buttons = {btn0, btn1, btn2, btn3, btn4,
                     btn5, btn6, btn7, btn8, btn9, btnDivide, btnPercent, btnAc, btnEqual,
                     btnPlus, btnPlusMinus, btnDot, btnMultiply, btnMinus, btnC, btnSin, btnCos,
-                    btnTan, btnCot};
+                    btnTan, btnCot, btnLog, btnEx, btnPwr, btnPi, btnSqrt};
             Arrays.stream(buttons).forEach(button -> button.setOnAction(buttonController));
             btnHistory.setOnAction(e -> {
                 Stage stage = new Stage();
@@ -96,7 +100,7 @@
 
             //hBoxHistory.getChildren().add(btnHistory);
 
-            for (int i = 0; i < 5; i++) {
+            for (int i = 0; i < 6; i++) {
                 ColumnConstraints colConst = new ColumnConstraints();
                 colConst.setPercentWidth(25);
                 gridPaneButtons.getColumnConstraints().add(colConst);
@@ -108,31 +112,15 @@
                 gridPaneButtons.getRowConstraints().add(rowConst);
             }
 
-
-            gridPaneButtons.addRow(0, btnC, btnAc, btnPlusMinus, btnPercent, btnDivide);
-            gridPaneButtons.addRow(1, btnSin, btn7, btn8, btn9, btnMultiply);
-            gridPaneButtons.addRow(2, btnCos, btn4, btn5, btn6, btnMinus);
-            gridPaneButtons.addRow(3, btnTan, btn1, btn2, btn3, btnPlus);
-            gridPaneButtons.add(btnCot, 0, 4);
-            gridPaneButtons.add(btn0, 1, 4, 2, 1);
-            gridPaneButtons.add(btnDot, 3, 4);
-            gridPaneButtons.add(btnEqual, 4, 4);
-            gridPaneButtons.add(btnHistory, 3, 5, 2, 1);
-
+            gridPaneButtons.addColumn(0, btnEx, btnLog, btnSqrt, btnPwr, btnPi);
+            gridPaneButtons.addColumn(1, btnC, btnSin, btnCos, btnTan, btnCot);
+            gridPaneButtons.addColumn(2, btnAc, btn7, btn4, btn1);
+            gridPaneButtons.addColumn(3, btnPlusMinus, btn8, btn5, btn2);
+            gridPaneButtons.addColumn(4, btnPercent, btn9, btn6, btn3, btnDot);
+            gridPaneButtons.addColumn(5, btnDivide, btnMultiply, btnMinus, btnPlus, btnEqual);
+            gridPaneButtons.add(btn0, 2, 4, 2, 1);
+            gridPaneButtons.add(btnHistory, 4, 5, 2, 1);
             this.getChildren().addAll(tfResult, gridPaneButtons, hBoxHistory);
-
-            /*
-
-            URL cssUrl = getClass().getResource("/mainstyle.css");
-            if (cssUrl == null) {
-                System.out.println("CSS file not found!");
-            } else {
-                System.out.println("CSS URL: " + cssUrl.toExternalForm());
-                String css = cssUrl.toExternalForm();
-                this.getStylesheets().add(css);
-            }
-
-             */
 
         }
 
@@ -166,9 +154,13 @@
 
             btnHistory = new Button("  History");
 
-            btnLog = new Button("log10\u200B(x)");
+            btnLog = new Button("log\u2081\u2080");
+            btnEx = new Button("e\u02E3");
+            btnPi = new Button("\u03C0");
+            btnSqrt = new Button("\u221A\u0078");
+            btnPwr = new Button("x\u00B2");
 
-            Button[] additional = {btnSin, btnCos, btnTan, btnCot};
+            Button[] additional = {btnSin, btnCos, btnTan, btnCot, btnLog, btnPi, btnPwr, btnEx, btnSqrt};
 
             Arrays.stream(additional).forEach(btn -> btn.setId("additional"));
 
@@ -188,7 +180,7 @@
             Button[] buttons = {btn0, btn1, btn2, btn3, btn4,
                     btn5, btn6, btn7, btn8, btn9, btnDivide, btnPercent, btnAc, btnEqual,
                     btnPlus, btnPlusMinus, btnDot, btnMultiply, btnMinus, btnC, btnSin, btnCos, btnTan, btnCot,
-                    btnLog, btnHistory};
+                    btnLog, btnHistory, btnPi, btnPwr, btnSqrt, btnEx};
 
             Arrays.stream(buttons).forEach(this::buttonConfig);
 
